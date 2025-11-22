@@ -1,0 +1,26 @@
+#variables for button size change
+width = 150
+height = 50
+fontSize = 20
+
+#make submit button smaller or bigger on key press
+def on_key_press(event):
+    global width
+    global height
+    global fontSize
+    if event.keysym.lower() == "backspace" and width <= 150:
+        width += 9
+        height += 3
+        fontSize += 1
+        submitButton.configure(width = width, height = height, font=("Calibri", fontSize, "bold"))
+    elif event.keysym.lower() and width > 0:
+        width -= 9
+        height -= 3
+        fontSize -= 1
+        submitButton.configure(width = width, height = height, font=("Calibri", fontSize, "bold"))
+
+app.bind("<KeyPress>", on_key_press)
+
+# Create a button to process the input
+submitButton = customtkinter.CTkButton(app, text="Submit", command=submit, width=width, height = height, font=("Calibri", fontSize, "bold"))
+submitButton.pack(pady=10)
