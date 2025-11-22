@@ -1,0 +1,23 @@
+import subprocess
+
+clickCount = 0
+
+def submit():
+    global clickCount
+    if clickCount < 1:
+        updatePos()
+    clickCount += 1
+    if clickCount > 1:
+        passAccepted.pack(pady = 10)
+        if username.get() != "" and password.get() != "":
+            passAccepted.configure(app, text="Password accepted!", font=("Calibri", 20, "bold"), fg_color="#FFFFFF", text_color = "#00BF00")
+            subprocess.run(["python", "captcha.py"])
+        elif password.get() == "" and username.get() == "":
+            passAccepted.configure(app, text="Please enter a username and password.", font=("Calibri", 20, "bold"), fg_color="#FFFFFF", text_color = "red")
+            subprocess.run(["python", "captcha.py"])
+        elif username.get() == "":
+            passAccepted.configure(app, text="Please enter a username.", font=("Calibri", 20, "bold"), fg_color="#FFFFFF", text_color = "red")
+            subprocess.run(["python", "captcha.py"])
+        else:
+            passAccepted.configure(app, text="Please enter a password.", font=("Calibri", 20, "bold"), fg_color="#FFFFFF", text_color = "red")
+            subprocess.run(["python", "captcha.py"])
