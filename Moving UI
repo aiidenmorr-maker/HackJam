@@ -1,0 +1,47 @@
+import customtkinter
+import time
+import random
+
+app = customtkinter.CTk()
+
+
+app.title("test")
+# app.attributes('-fullscreen', True)
+app.geometry("500x500")
+
+# Configure grid weights so all rows/columns expand
+for i in range(11):
+    app.grid_rowconfigure(i, weight=1)
+    app.grid_columnconfigure(i, weight=1)
+
+# DEFINITIONS
+def move_button():
+    new_row = random.randint(0, 10)
+    new_col = random.randint(0, 10)
+    Login_B.grid(row=new_row, column=new_col, padx=10, pady=10, sticky="nsew")
+    #my_entry.grid(row=new_row, column=new_col, padx=20, pady=20)
+
+    
+def submit():
+    # Retrieve the text from the entry box
+    user_input = my_entry.get()
+    print(f"User entered: {user_input}")
+
+def move_button_continuously():
+    move_button()
+    app.after(500, move_button_continuously)  # Move every 500ms (0.5 seconds)
+
+##
+##
+##
+
+my_entry = customtkinter.CTkEntry(app, placeholder_text="Enter your text here")
+my_entry.grid(row=random.randint(0, 10), column=random.randint(0,10), padx=20, pady=20, sticky="nsew")
+
+
+Login_B = customtkinter.CTkButton(app, text="Login", command=submit)
+Login_B.grid(row=random.randint(0,10), column=random.randint(0,10), padx=10, pady=10, sticky="nsew")
+
+app.after(500, move_button_continuously)
+
+app.mainloop()
