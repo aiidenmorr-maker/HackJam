@@ -1,0 +1,24 @@
+xPos = 668
+yPos = 502
+xDirection = 1
+yDirection = 1
+
+def updatePos():
+    global xPos
+    global yPos
+    global xDirection
+    global yDirection
+    xPos += 1 * xDirection
+    yPos += 1 * yDirection
+
+    if xPos >= 1330 or xPos <= 0:
+        xDirection *= -1
+
+    if yPos >= 735 or yPos <= 0:
+        yDirection *= -1
+
+    submitButton.place(x=xPos, y=yPos)
+
+    app.after(3, updatePos)
+
+updatePos()
